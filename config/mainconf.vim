@@ -18,6 +18,10 @@ set clipboard+=unnamed
 set history=50
 set langmenu=none
 set winaltkeys=no
+set complete-=i
+set nrformats-=octal
+set shiftround
+set display=uhex,lastline
 
 let mapleader = ","
 let g:mapleader = ","
@@ -25,6 +29,10 @@ let g:mapleader = ","
 set noswapfile
 set nobackup
 set nowritebackup
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
 
 
 " User interface "
@@ -38,12 +46,14 @@ set matchtime=1
 
 set cmdheight=1
 set scrolloff=7
+set sidescrolloff=5
 set foldcolumn=1
 set laststatus=2
 
 try
   set switchbuf=useopen,usetab,newtab
   set showtabline=2
+  set smarttab
 catch
 endtry
 
