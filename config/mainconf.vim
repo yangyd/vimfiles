@@ -34,6 +34,7 @@ if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
+set noshellslash
 
 " User interface "
 
@@ -49,13 +50,9 @@ set scrolloff=7
 set sidescrolloff=5
 set foldcolumn=1
 set laststatus=2
+set showtabline=2
 
-try
-  set switchbuf=useopen,usetab,newtab
-  set showtabline=2
-  set smarttab
-catch
-endtry
+set switchbuf=usetab,newtab
 
 set title
 set noerrorbells
@@ -81,6 +78,7 @@ if has("win16") || has("win32")
   set gfw=NSimSun:h9
 endif
 
+
 " File format and character encoding "
 
 set fileformats=unix,dos,mac
@@ -93,12 +91,25 @@ let &termencoding = &encoding
 set ambiwidth=double
 
 
-" ignore-pattern and auto commands "
+" Indent and line wrap "
+
+set expandtab
+set smarttab
+set shiftwidth=2
+set tabstop=2
+
+set autoindent
+set smartindent
+
+set linebreak
+set textwidth=120
+set nowrap
+
+
+" Ignore patterns, autocmds and plugin configs "
 if has("win16") || has("win32")
-  source ~/vimfiles/config/patterns.vim
-  source ~/vimfiles/config/autocmds.vim
+  source ~/vimfiles/config/extra.vim
 else
-  source ~/.vim/config/patterns.vim
-  source ~/.vim/config/autocmds.vim
+  source ~/.vim/config/extra.vim
 endif
 

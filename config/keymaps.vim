@@ -55,7 +55,7 @@ nnoremap <C-Down> <C-W>2<LT>
 nnoremap <Leader>h :vertical help<Space>
 
 " buffer control
-nnoremap <Leader>bd :call <SID>BufcloseCloseIt()
+nnoremap <Leader>bd :call <SID>BufcloseCloseIt()<CR>
 nnoremap <Leader>ba :1,1000 bd!<CR>
 nnoremap <Leader>bt :tab sball<CR>
 
