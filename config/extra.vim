@@ -11,6 +11,7 @@ endif
 " CtrlP "
 let g:ctrlp_custom_ignore = 'node_modules'
 let g:ctrlp_working_path_mode = ''
+let g:ctrlp_match_window = 'top,max:20'
 nnoremap <C-m> :CtrlPMRUFiles<CR>
 
 " NerdTree and NerdTree-tabs "
@@ -22,6 +23,16 @@ let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:bufExplorerDefaultHelp = 0
 nnoremap <C-o> :BufExplorer<CR>
 
+" Emmet "
+let g:user_emmet_expandabbr_key = '<M-m><M-m>'
+let g:user_emmet_next_key = '<M-m><Tab>'
+let g:user_emmet_removetag_key = '<M-m>d'
+
+" Ultisnips "
+let g:UltiSnipsExpandTrigger = '<Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+
 " better coloring "
 try
   colorscheme peaksea
@@ -30,8 +41,7 @@ catch
 endtry
 
 
-
-
+" Auto Commands "
 
 " Return to last edit position when opening files
 autocmd BufReadPost *

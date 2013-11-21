@@ -1,33 +1,36 @@
 
-" moving cursor around
+" Cursor movement in Normal/Visual mode
 noremap - <S-Down>
 noremap = <S-Up>
-noremap 0 ^
-noremap ; <End>
+noremap 9 ^
+noremap 0 $
 noremap <Space> w
 
 " don't mess up the registry when delete with x
 nnoremap x "_x
 
-" auto complete
+" keyword complete
 inoremap <M-n> <C-n>
+
+" omni complete "
+inoremap <expr><M-Space> pumvisible() ? "\<Down>" : "\<C-x>\<C-o>"
 
 " Windows-style paste
 inoremap <C-v> <C-R>*
 cnoremap <C-v> <C-R>*
 
-" Insert mode cursor movement
+" Cursor movement in Insert/Command mode
 inoremap <M-o> <Esc>o
-inoremap <M-b> <Esc>^i
-inoremap <M-;> <End>
 
 inoremap <M-h> <Left>
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-l> <Right>
+inoremap <M-9> <Esc>^i
+inoremap <M-0> <End>
 
-cnoremap <M-b> <C-b>
-cnoremap <M-;> <End>
+cnoremap <M-9> <C-b>
+cnoremap <M-0> <End>
 cnoremap <M-h> <Left>
 cnoremap <M-l> <Right>
 
@@ -39,11 +42,15 @@ nnoremap <M-w> :tabprevious<CR>
 inoremap <M-w> <Esc>:tabprevious<CR>
 nnoremap <C-Tab> :tabnext<CR>
 
-" Window movement "
+" Window switching "
 nnoremap <C-h> <C-W>h
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
+inoremap <C-h> <Esc><C-W>h
+inoremap <C-j> <Esc><C-W>j
+inoremap <C-k> <Esc><C-W>k
+inoremap <C-l> <Esc><C-W>l
 nnoremap <C-Left> <C-W>h
 nnoremap <C-Right> <C-W>l
 
@@ -97,16 +104,11 @@ nnoremap <M-2> :winsize 120 32<CR>
 nnoremap <M-3> :winsize 80 24<CR>
 
 
-" surround selected text with...
-vnoremap () <esc>`>a)<esc>`<i(<esc>
-vnoremap [] <esc>`>a]<esc>`<i[<esc>
-vnoremap {} <esc>`>a}<esc>`<i{<esc>
-vnoremap '' <esc>`>a'<esc>`<i'<esc>
-vnoremap "" <esc>`>a"<esc>`<i"<esc>
-
-" auto complete of (, ", ', [
+" auto complete of (, ", ', [ and {
 inoremap ( ()<Left>
 inoremap () ()
+inoremap [ []<Left>
+inoremap [] []
 inoremap { {}<Left>
 inoremap {} {}
 inoremap ' ''<Left>
@@ -117,13 +119,18 @@ inoremap "" ""
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {<S-Enter> {<CR>}<Esc>O
 
-" append colon/semicolon at the end of line (super useful)
-nnoremap <Leader>; $a;<Esc>
-nnoremap <Leader>: $a:<Esc>
-nnoremap <LT>: $a:<Esc>
+" Append colon/semicolon to the end of the current line (super useful)
+nnoremap <M-;> myA;<Esc>`y
+nnoremap <M-:> myA:<Esc>`y
+inoremap <M-;> <Esc>myA;<Esc>`ya
+inoremap <M-:> <Esc>myA:<Esc>`ya
 
-" flip the case of previous word (super useful 2)
+" Flip the case of previous word (super useful 2)
 inoremap <M-u> <Esc>bve~<Esc>ea
+
+" Quickly clear/delete the current line in insert mode "
+inoremap <M-d> <Esc>ddi
+inoremap <M-s> <Esc>S
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
