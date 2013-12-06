@@ -4,7 +4,7 @@ noremap - <S-Down>
 noremap = <S-Up>
 noremap 9 ^
 noremap 0 $
-noremap <Space> w
+noremap <Space> W
 
 " don't mess up the registry when delete with x
 nnoremap x "_x
@@ -84,15 +84,18 @@ vnoremap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 
 " When you press gv you vimgrep after the selected text
-vnoremap <silent> <Leader>g :call <sid>VisualSelection('gv', '')<CR>
+vnoremap <silent> <Leader>f :call <sid>VisualSelection('f')<CR>
+vnoremap <silent> <Leader>g :call <sid>VisualSelection('g')<CR>
 
 " Vimgreps in the current file
-nnoremap <Leader>g :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
+nnoremap <Leader>f :vimgrep // <C-r>%<C-b><right><right><right><right><right><right><right><right><right>
+nnoremap <Leader>g :vimgrep //j **/*<C-b><right><right><right><right><right><right><right><right><right>
 
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <Leader>r :call <sid>VisualSelection('replace', '')<CR>
+" When you press <leader>s you can search and replace the selected text
+vnoremap <silent> <Leader>s :call <sid>VisualSelection('s')<CR>
 
-nnoremap <Leader>c :botright cope20<CR>
+nnoremap <Leader>cc :botright cope16<CR>
+nnoremap <Leader>cx :.ccl<CR>
 nnoremap <Leader>cn :cn<CR>
 nnoremap <Leader>cp :cp<CR>
 
@@ -120,8 +123,10 @@ inoremap {<CR> {<CR>}<Esc>O
 inoremap {<S-Enter> {<CR>}<Esc>O
 
 " Append colon/semicolon to the end of the current line (super useful)
+nnoremap <M-,> myA,<Esc>`y
 nnoremap <M-;> myA;<Esc>`y
 nnoremap <M-:> myA:<Esc>`y
+inoremap <M-,> <Esc>myA,<Esc>`ya
 inoremap <M-;> <Esc>myA;<Esc>`ya
 inoremap <M-:> <Esc>myA:<Esc>`ya
 
@@ -142,21 +147,19 @@ function! s:CmdLine(str)
     unmenu Foo
 endfunction
 
-function! s:VisualSelection(direction, extra_filter) range
+function! s:VisualSelection(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
 
     let l:pattern = escape(@", '\\/.*$^~[]')
     let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call s:CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.' . a:extra_filter)
-    elseif a:direction == 'replace'
-        call s:CmdLine("%s" . '/'. l:pattern . '/')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
+    if a:direction ==# 'f'
+        call s:CmdLine("vimgrep /" . l:pattern . '/ <C-r>%')
+    elseif a:direction ==# 'g'
+        call s:CmdLine("vimgrep /" . l:pattern . '/j **/*')
+    elseif a:direction ==# 's'
+        call s:CmdLine("%s/" . l:pattern . '/')
     endif
 
     let @/ = l:pattern
@@ -174,12 +177,12 @@ function! s:BufcloseCloseIt()
      bnext
    endif
 
-   if bufnr("%") == l:currentBufNum
+   if bufnr("%") ==# l:currentBufNum
      new
    endif
 
    if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
+     execute("bdelete! " . l:currentBufNum)
    endif
 endfunction
 
@@ -192,7 +195,7 @@ func! s:DeleteTillSlash()
         let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
     endif
 
-    if g:cmd == g:cmd_edited
+    if g:cmd ==# g:cmd_edited
         if has("win16") || has("win32")
             let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
         else

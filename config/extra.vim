@@ -12,7 +12,7 @@ endif
 let g:ctrlp_custom_ignore = 'node_modules'
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_match_window = 'top,max:20'
-nnoremap <C-m> :CtrlPMRUFiles<CR>
+nnoremap <C-o> :CtrlPMRUFiles<CR>
 
 " NerdTree and NerdTree-tabs "
 let g:nerdtree_tabs_open_on_gui_startup = 0
@@ -21,7 +21,7 @@ nnoremap <C-n> :NERDTreeMirrorToggle<CR>
 " BufExplorer "
 let g:bufExplorerDisableDefaultKeyMapping = 1
 let g:bufExplorerDefaultHelp = 0
-nnoremap <C-o> :BufExplorer<CR>
+nnoremap <C-b> :BufExplorer<CR>
 
 " Emmet "
 let g:user_emmet_expandabbr_key = '<M-m><M-m>'
@@ -35,7 +35,8 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 " better coloring "
 try
-  colorscheme peaksea
+  colorscheme freya
+  set background=light
   set background=dark
 catch
 endtry
