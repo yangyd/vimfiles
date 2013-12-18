@@ -1,27 +1,25 @@
 
-" Wild ignores: compiled files and version control dirs
+" Wild ignores
 set wildignore=*.o,*~,*.pyc
+set wildignore+=*.png,*.gif,*.jpg,*.jpeg,*.woff,*.otf
 if has("win16") || has("win32")
-  set wildignore+=*\\.git\\*,*\\.hg\\*,*\\.svn\\*
+  set wildignore+=*\\.git\\*,*\\.hg\\*,*\\.svn\\*,*\\node_modules\\*
 else
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
 endif
 
 
 " CtrlP "
-let g:ctrlp_custom_ignore = 'node_modules'
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_match_window = 'top,max:20'
 nnoremap <C-o> :CtrlPMRUFiles<CR>
 
 " NerdTree and NerdTree-tabs "
 let g:nerdtree_tabs_open_on_gui_startup = 0
-nnoremap <C-n> :NERDTreeMirrorToggle<CR>
+nnoremap <F5> :NERDTreeMirrorToggle<CR>
 
 " BufExplorer "
 let g:bufExplorerDisableDefaultKeyMapping = 1
-let g:bufExplorerDefaultHelp = 0
-nnoremap <C-b> :BufExplorer<CR>
 
 " Emmet "
 let g:user_emmet_expandabbr_key = '<M-m><M-m>'
@@ -34,12 +32,7 @@ let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 " better coloring "
-try
-  colorscheme freya
-  set background=light
-  set background=dark
-catch
-endtry
+colorscheme freya
 
 
 " Auto Commands "

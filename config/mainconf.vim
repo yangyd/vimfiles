@@ -105,8 +105,11 @@ set linebreak
 set textwidth=120
 set nowrap
 
+" coloring
+colorscheme torte
+hi Normal guibg=#2a2a2a
 
-" Ignore patterns, autocmds and plugin configs "
+" wildignores, autocmds and plugin configs "
 if has("win16") || has("win32")
   source ~/vimfiles/config/extra.vim
 else

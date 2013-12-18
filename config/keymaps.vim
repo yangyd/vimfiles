@@ -11,16 +11,18 @@ nnoremap x "_x
 
 " keyword complete
 inoremap <M-n> <C-n>
+inoremap <M-p> <C-p>
 
 " omni complete "
-inoremap <expr><M-Space> pumvisible() ? "\<Down>" : "\<C-x>\<C-o>"
+inoremap <expr><M-Space> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
 
 " Windows-style paste
-inoremap <C-v> <C-R>*
-cnoremap <C-v> <C-R>*
+inoremap <C-v> <C-r>*
+cnoremap <C-v> <C-r>*
 
 " Cursor movement in Insert/Command mode
 inoremap <M-o> <Esc>o
+inoremap <M-O> <Esc>O
 
 inoremap <M-h> <Left>
 inoremap <M-j> <Down>
@@ -62,9 +64,11 @@ nnoremap <C-Down> <C-W>2<LT>
 nnoremap <Leader>h :vertical help<Space>
 
 " buffer control
-nnoremap <Leader>bd :call <SID>BufcloseCloseIt()<CR>
+nnoremap <silent> <Leader>bd :call <SID>BufcloseCloseIt()<CR>
 nnoremap <Leader>ba :1,1000 bd!<CR>
 nnoremap <Leader>bt :tab sball<CR>
+nnoremap <Tab> <C-^>
+nnoremap <Leader>l :ls!<CR>
 
 " open new...
 nnoremap <Leader>t :tabnew<CR>
@@ -93,11 +97,6 @@ nnoremap <Leader>g :vimgrep //j **/*<C-b><right><right><right><right><right><rig
 
 " When you press <leader>s you can search and replace the selected text
 vnoremap <silent> <Leader>s :call <sid>VisualSelection('s')<CR>
-
-nnoremap <Leader>cc :botright cope16<CR>
-nnoremap <Leader>cx :.ccl<CR>
-nnoremap <Leader>cn :cn<CR>
-nnoremap <Leader>cp :cp<CR>
 
 
 " Window size control "
