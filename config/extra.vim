@@ -54,3 +54,45 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
+" Quick toggling of the BufExplorer and the Quickfix window "
+
+nnoremap <silent> <F2> :call <SID>QuickfixToggle()<CR>
+nnoremap <F3> :cn<CR>
+nnoremap <F4> :cp<CR>
+
+nnoremap <silent> ; :call <SID>BufExplrToggle()<CR>
+
+function! s:listbfn(expr)
+  redir => l:foo
+  silent! ls!
+  redir END
+  let l:bar = filter(split(l:foo, '\n'), 'v:val =~# ' . a:expr)
+  return map(l:bar, 'str2nr(matchstr(v:val, "\\d\\+"))')
+endfunction
+
+function! s:QuickfixToggle()
+  for l:bfn in s:listbfn('"\\[Quickfix List\\]"')
+    if bufwinnr(l:bfn) !=# -1
+      cclose
+      return
+    endif
+  endfor
+
+  let l:oldwn = winnr()
+  botright copen 16
+  if l:oldwn !=# winnr()
+    wincmd p
+  endif
+endfunction
+
+function! s:BufExplrToggle()
+  let l:wn = winnr()
+  for l:bfn in s:listbfn('"\\[BufExplorer\\]"')
+    if bufwinnr(l:bfn) ==# l:wn
+      normal q
+      return
+    endif
+  endfor
+  execute 'BufExplorer'
+endfunction
+
