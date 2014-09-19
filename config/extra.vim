@@ -16,15 +16,16 @@ nnoremap <C-o> :CtrlPMRUFiles<CR>
 
 " NerdTree and NerdTree-tabs "
 let g:nerdtree_tabs_open_on_gui_startup = 0
-nnoremap <F5> :NERDTreeMirrorToggle<CR>
+nnoremap <F1> :NERDTreeMirrorToggle<CR>
 
 " BufExplorer "
 let g:bufExplorerDisableDefaultKeyMapping = 1
 
 " Emmet "
-let g:user_emmet_expandabbr_key = '<M-m><M-m>'
-let g:user_emmet_next_key = '<M-m><Tab>'
-let g:user_emmet_removetag_key = '<M-m>d'
+let g:user_emmet_expandabbr_key = '<M-e>'
+let g:user_emmet_next_key = '<M-f>'
+let g:user_emmet_prev_key = '<M-r>'
+let g:user_emmet_removetag_key = '<M-d>'
 
 " Ultisnips "
 let g:UltiSnipsExpandTrigger = '<Tab>'
@@ -60,7 +61,7 @@ nnoremap <silent> <F2> :call <SID>QuickfixToggle()<CR>
 nnoremap <F3> :cn<CR>
 nnoremap <F4> :cp<CR>
 
-nnoremap <silent> ; :call <SID>BufExplrToggle()<CR>
+nnoremap <silent> ' :call <SID>BufExplrToggle()<CR>
 
 function! s:listbfn(expr)
   redir => l:foo
