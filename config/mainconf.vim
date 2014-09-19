@@ -1,4 +1,20 @@
 
+let g:RUNTIME_IS_X11 = 0
+let g:RUNTIME_IS_WINDOWS = 0
+let g:RUNTIME_IS_GUI = 0
+
+if has("gui_running")
+  let g:RUNTIME_IS_GUI = 1
+endif
+
+if g:RUNTIME_IS_GUI && has("x11")
+  let g:RUNTIME_IS_X11 = 1
+endif
+
+if has("win32") || has("win64")
+  let g:RUNTIME_IS_WINDOWS = 1
+endif
+
 " Basic settings "
 
 set nocompatible
