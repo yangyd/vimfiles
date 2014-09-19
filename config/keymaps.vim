@@ -1,24 +1,32 @@
 
 " Cursor movement in Normal/Visual mode
-noremap - <S-Down>
-noremap = <S-Up>
+noremap - 24k
+noremap = 24j
 noremap 9 ^
 noremap 0 $
 noremap <Space> W
 
-" don't mess up the registry when delete with x
+" don't mess up the registry when deleting a single character
 nnoremap x "_x
+
+" don't mess up the registry when pasting upon selection
+vnoremap p "_xP
 
 " keyword complete
 inoremap <M-n> <C-n>
 inoremap <M-p> <C-p>
 
 " omni complete "
-inoremap <expr><M-Space> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
+inoremap <expr><M-m> pumvisible() ? "\<C-n>" : "\<C-x>\<C-o>"
 
-" Windows-style paste
-inoremap <C-v> <C-r>*
-cnoremap <C-v> <C-r>*
+" paste without leaving edit mode
+if g:RUNTIME_IS_X11
+  inoremap <C-v> <C-r>+
+  cnoremap <C-v> <C-r>+
+elseif g:RUNTIME_IS_WINDOWS
+  inoremap <C-v> <C-r>*
+  cnoremap <C-v> <C-r>*
+endif
 
 " Cursor movement in Insert/Command mode
 inoremap <M-o> <Esc>o
@@ -100,10 +108,10 @@ vnoremap <silent> <Leader>s :call <sid>VisualSelection('s')<CR>
 
 
 " Window size control "
-nnoremap <M-`> :simalt ~x<CR>
-nnoremap <M-1> :winsize 166 40<CR>
+nnoremap <M-4> :simalt ~x<CR>
+nnoremap <M-3> :winsize 166 40<CR>
 nnoremap <M-2> :winsize 120 32<CR>
-nnoremap <M-3> :winsize 80 24<CR>
+nnoremap <M-1> :winsize 80 24<CR>
 
 
 " auto complete of (, ", ', [ and {
@@ -121,7 +129,7 @@ inoremap "" ""
 inoremap {<CR> {<CR>}<Esc>O
 inoremap {<S-Enter> {<CR>}<Esc>O
 
-" Append colon/semicolon to the end of the current line (super useful)
+" Append colon/semicolon to the end of the current line
 nnoremap <M-,> myA,<Esc>`y
 nnoremap <M-;> myA;<Esc>`y
 nnoremap <M-:> myA:<Esc>`y
@@ -129,12 +137,13 @@ inoremap <M-,> <Esc>myA,<Esc>`ya
 inoremap <M-;> <Esc>myA;<Esc>`ya
 inoremap <M-:> <Esc>myA:<Esc>`ya
 
-" Flip the case of previous word (super useful 2)
-inoremap <M-u> <Esc>bve~<Esc>ea
+" Flip the case of the current word
+noremap <M-c> viw~e
+inoremap <M-c> <Esc>viw~ea
 
-" Quickly clear/delete the current line in insert mode "
-inoremap <M-d> <Esc>ddi
-inoremap <M-s> <Esc>S
+" Close the preview window
+noremap <F5> :pclose<CR>
+inoremap <F5> <Esc>:pclose<CR>a
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
