@@ -30,7 +30,6 @@ set wildmenu
 set timeoutlen=500
 
 set autoread
-set clipboard+=unnamed
 set history=50
 set langmenu=none
 set winaltkeys=no
@@ -38,6 +37,12 @@ set complete-=i
 set nrformats-=octal
 set shiftround
 set display=uhex,lastline
+
+if g:RUNTIME_IS_X11
+  set clipboard^=unnamedplus
+elseif g:RUNTIME_IS_WINDOWS
+  set clipboard^=unnamed
+endif
 
 let mapleader = ","
 let g:mapleader = ","
@@ -83,15 +88,18 @@ set incsearch
 set ignorecase
 set smartcase
 
-if has("gui_running")
+if g:RUNTIME_IS_GUI
   set guioptions=
   set t_Co=256
   set mouse=
 endif
 
-if has("win16") || has("win32")
-  set gfn=Consolas:h9
-  set gfw=NSimSun:h9
+if g:RUNTIME_IS_X11
+  " set guifont=Source\ Code\ Pro\ 10
+  set guifont=Fira\ Mono\ OT\ 9
+elseif g:RUNTIME_IS_WINDOWS
+  set guifont=Consolas:h9
+  set guifontwide=NSimSun:h9
 endif
 
 
@@ -122,8 +130,8 @@ set textwidth=120
 set nowrap
 
 " coloring
-colorscheme torte
-hi Normal guibg=#2a2a2a
+colorscheme darkblue
+highlight Normal guibg=#2a2a2a
 
 " wildignores, autocmds and plugin configs "
 if has("win16") || has("win32")
