@@ -133,10 +133,21 @@ set nowrap
 colorscheme darkblue
 highlight Normal guibg=#2a2a2a
 
-" wildignores, autocmds and plugin configs "
-if has("win16") || has("win32")
-  source ~/vimfiles/config/extra.vim
-else
-  source ~/.vim/config/extra.vim
-endif
+
+" Return to last edit position when opening files
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+" Remove trailing spaces on save
+func! DeleteTrailingWS()
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
