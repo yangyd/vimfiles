@@ -1,12 +1,19 @@
 
-" Wild ignores
-set wildignore=*.o,*~,*.pyc
-set wildignore+=*.png,*.gif,*.jpg,*.jpeg,*.woff,*.otf
-if has("win16") || has("win32")
-  set wildignore+=*\\.git\\*,*\\.hg\\*,*\\.svn\\*,*\\node_modules\\*
-else
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
-endif
+let s:ignore_files = '
+      \ ~ .o .pyc
+      \ .png .gif
+      \'
+
+let s:ignore_dirs = '
+      \ .git .hg .svn
+      \ node_modules bower_components
+      \ target classes build
+      \'
+
+let s:ignores = map(split(s:ignore_files), '"*".v:val')
+let s:ignores += map(split(s:ignore_dirs),
+      \  g:RUNTIME_IS_WINDOWS ? '"*\\" . v:val . "\\*"' : '"*/" . v:val . "/*"')
+let &wildignore=join(s:ignores, ',')
 
 
 " CtrlP "
@@ -33,5 +40,6 @@ let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 " better coloring "
-colorscheme freya
+colorscheme jellybeans
+hi Normal guibg=#0b0b0b guifg=#cccccc
 

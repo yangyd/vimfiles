@@ -147,10 +147,7 @@ inoremap <F5> <Esc>:pclose<CR>a
 
 
 " Quick toggling of BufExplorer and the Quickfix window
-if exists(':BufExplorer') ==# 2
-  nnoremap <silent> ' :call <SID>BufExplrToggle()<CR>
-endif
-
+nnoremap <silent> <F8> :call <SID>BufExplrToggle()<CR>
 nnoremap <silent> <F2> :call <SID>QuickfixToggle()<CR>
 nnoremap <F3> :cn<CR>
 nnoremap <F4> :cp<CR>

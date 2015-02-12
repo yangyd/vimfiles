@@ -9,7 +9,7 @@ let s:cfgdir = filter(map(filter(split(&runtimepath, ','), "v:val !~# 'after$'")
 
 execute pathogen#infect()
 
-for s:cfgfile in ['mainconf.vim', 'keymaps.vim']
+for s:cfgfile in ['mainconf.vim', 'keymaps.vim', 'extra.vim']
   execute 'source ' . join([s:cfgdir, s:cfgfile], s:sep)
 endfor
 
