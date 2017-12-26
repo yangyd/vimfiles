@@ -9,6 +9,7 @@ noremap 0 $
 nnoremap x "_x
 
 " don't mess up the registry when pasting upon selection
+vnoremap <silent> p :call <SID>paste_over()<CR>
 
 " keyword complete
 inoremap <M-n> <C-n>
@@ -70,6 +71,7 @@ nnoremap <C-Down> <C-W>2<LT>
 nnoremap <Leader>h :vertical help<Space>
 
 " buffer control
+nnoremap <Leader>ba :%bdelete<CR>
 nnoremap <silent> <Leader>bd :call <SID>buffer_close()<CR>
 nnoremap <Leader>bt :tab sball<CR>
 nnoremap <Tab> <C-^>
@@ -142,12 +144,14 @@ inoremap <M-c> <Esc>viw~ea
 noremap <F5> :pclose<CR>
 inoremap <F5> <Esc>:pclose<CR>a
 
-
 " Quick toggling of BufExplorer and the Quickfix window
 nnoremap <silent> <F8> :call <SID>BufExplrToggle()<CR>
 nnoremap <silent> <F2> :call <SID>QuickfixToggle()<CR>
 nnoremap <F3> :cn<CR>
 nnoremap <F4> :cp<CR>
+
+# File tree panel
+nnoremap <silent> <F7> :call <SID>netrw_toggle()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -222,7 +226,6 @@ func! s:CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
 
-
 function! s:listbfn(expr)
   redir => l:foo
   silent! ls!
@@ -257,3 +260,55 @@ function! s:BufExplrToggle()
   execute 'BufExplorer'
 endfunction
 
+function! s:paste_over() range
+  " get start and end position of selection
+  " [bufnum, lnum, col, off, curswant]
+  let l:pos_start = getpos("'<")
+  let l:pos_end = getpos("'>")
+  let l:line_len = col("$") - 1
+
+  " delete selected text
+  execute('normal! gv"_x')
+
+  " get the cursor position after deletion
+  let l:pos_after = getpos(".")
+
+  " determine whether we should paste before or after
+  " hard to explain, do some experiment
+  let l:paste_op = 'p'
+  if s:is_multiline_selection(l:pos_start, l:pos_end, l:line_len)
+    " multi-line selection, compare line
+    if l:pos_after[1] ==# l:pos_start[1]
+      let l:paste_op = 'P'
+    endif
+  else
+    " same line selection, compare col
+    if l:pos_after[2] ==# l:pos_start[2]
+      let l:paste_op = 'P'
+    endif
+  endif
+
+  execute('normal! ' . l:paste_op)
+  " call setpos('.', l:pos_before)
+endfunction
+
+function! s:is_multiline_selection(v_start, v_end, start_line_length) range
+  if a:v_start[1] ==# a:v_end[1]
+    " in same line, check if the whole line is in selection
+    if a:v_end[2] - a:v_start[2] < a:start_line_length
+      return 0
+    endif
+  endif
+  return 1
+endfunction
+
+function! s:netrw_toggle()
+  for l:bfn in s:listbfn('"NetrwTreeListing"')
+    let l:bwn = bufwinnr(l:bfn)
+    if l:bwn !=# -1
+      execute (l:bwn . 'close')
+      return
+    endif
+  endfor
+  execute 'Vexplore'
+endfunction
