@@ -4,13 +4,11 @@ noremap - 24k
 noremap = 24j
 noremap 9 ^
 noremap 0 $
-noremap <Space> W
 
 " don't mess up the registry when deleting a single character
 nnoremap x "_x
 
 " don't mess up the registry when pasting upon selection
-vnoremap p "_xP
 
 " keyword complete
 inoremap <M-n> <C-n>
@@ -72,8 +70,7 @@ nnoremap <C-Down> <C-W>2<LT>
 nnoremap <Leader>h :vertical help<Space>
 
 " buffer control
-nnoremap <silent> <Leader>bd :call <SID>BufcloseCloseIt()<CR>
-nnoremap <Leader>ba :1,1000 bd!<CR>
+nnoremap <silent> <Leader>bd :call <SID>buffer_close()<CR>
 nnoremap <Leader>bt :tab sball<CR>
 nnoremap <Tab> <C-^>
 nnoremap <Leader>l :ls!<CR>
@@ -182,7 +179,7 @@ function! s:VisualSelection(direction) range
 endfunction
 
 " Don't close window, when deleting a buffer
-function! s:BufcloseCloseIt()
+function! s:buffer_close()
    let l:currentBufNum = bufnr("%")
    let l:alternateBufNum = bufnr("#")
 

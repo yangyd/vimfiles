@@ -21,10 +21,6 @@ let g:ctrlp_working_path_mode = ''
 let g:ctrlp_match_window = 'top,max:20'
 nnoremap <C-o> :CtrlPMRUFiles<CR>
 
-" NerdTree and NerdTree-tabs "
-let g:nerdtree_tabs_open_on_gui_startup = 0
-nnoremap <F1> :NERDTreeMirrorToggle<CR>
-
 " BufExplorer "
 let g:bufExplorerDisableDefaultKeyMapping = 1
 
