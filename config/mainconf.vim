@@ -96,7 +96,8 @@ endif
 
 if g:RUNTIME_IS_X11
   " set guifont=Source\ Code\ Pro\ 10
-  set guifont=Fira\ Mono\ OT\ 9
+  " set guifont=Fira\ Mono\ OT\ 9
+  set guifont=Ubuntu\ Mono\ 13
 elseif g:RUNTIME_IS_WINDOWS
   set guifont=Consolas:h9
   set guifontwide=NSimSun:h9

@@ -150,7 +150,7 @@ nnoremap <silent> <F2> :call <SID>QuickfixToggle()<CR>
 nnoremap <F3> :cn<CR>
 nnoremap <F4> :cp<CR>
 
-# File tree panel
+" File tree panel
 nnoremap <silent> <F7> :call <SID>netrw_toggle()<CR>
 
 

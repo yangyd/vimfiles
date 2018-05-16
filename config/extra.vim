@@ -36,6 +36,6 @@ let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 " better coloring "
-colorscheme jellybeans
-hi Normal guibg=#0b0b0b guifg=#cccccc
+colorscheme peaksea
+" hi Normal guibg=#0b0b0b guifg=#cccccc
 
