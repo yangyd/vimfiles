@@ -99,8 +99,8 @@ if g:RUNTIME_IS_X11
   " set guifont=Fira\ Mono\ OT\ 9
   set guifont=Ubuntu\ Mono\ 13
 elseif g:RUNTIME_IS_WINDOWS
-  set guifont=Consolas:h9
-  set guifontwide=NSimSun:h9
+  set guifont=Consolas:h11
+  set guifontwide=NSimSun:h10
 endif
 
 
@@ -150,13 +150,3 @@ autocmd BufReadPost *
      \ endif
 " Remember info about open buffers on close
 set viminfo^=%
-
-" Remove trailing spaces on save
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-

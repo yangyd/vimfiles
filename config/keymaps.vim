@@ -47,9 +47,10 @@ cnoremap <M-l> <Right>
 nnoremap <C-q> :q<CR>
 
 " Tab switch "
-nnoremap <M-w> :tabprevious<CR>
-inoremap <M-w> <Esc>:tabprevious<CR>
-nnoremap <C-Tab> :tabnext<CR>
+nnoremap <M-[> :tabprevious<CR>
+nnoremap <M-]> :tabnext<CR>
+inoremap <M-[> <Esc>:tabprevious<CR>
+inoremap <M-]> <Esc>:tabnext<CR>
 
 " Window switching "
 nnoremap <C-h> <C-W>h
@@ -74,14 +75,14 @@ nnoremap <Leader>h :vertical help<Space>
 nnoremap <Leader>ba :%bdelete<CR>
 nnoremap <silent> <Leader>bd :call <SID>buffer_close()<CR>
 nnoremap <Leader>bt :tab sball<CR>
+
+" view buffer list, and type N Tab to switch
+" hit Tab directly switch between two most recent buffer
+nnoremap <Leader>bl :ls<CR>
 nnoremap <Tab> <C-^>
-nnoremap <Leader>l :ls!<CR>
 
 " open new...
-nnoremap <Leader>t :tabnew<CR>
-nnoremap <Leader>e :<C-\>e<SID>CurrentFileDir("e")<CR>
-cnoremap <Leader><Space> tabedit <C-r>=expand("%:p:h")<CR>/
-
+cnoremap <Leader><Space> tabedit <C-r>=expand("%:p:h")<CR>
 cnoremap <Leader>u <C-\>e<SID>DeleteTillSlash()<cr>
 
 " change to current file's dir
@@ -145,13 +146,12 @@ noremap <F5> :pclose<CR>
 inoremap <F5> <Esc>:pclose<CR>a
 
 " Quick toggling of BufExplorer and the Quickfix window
-nnoremap <silent> <F8> :call <SID>BufExplrToggle()<CR>
 nnoremap <silent> <F2> :call <SID>QuickfixToggle()<CR>
 nnoremap <F3> :cn<CR>
 nnoremap <F4> :cp<CR>
 
 " File tree panel
-nnoremap <silent> <F7> :call <SID>netrw_toggle()<CR>
+nnoremap <silent> <F8> :call <SID>netrw_toggle()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
