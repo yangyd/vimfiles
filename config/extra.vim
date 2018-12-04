@@ -32,7 +32,7 @@ let g:SuperTabDefaultCompletionType = "<C-n>"
 let g:SuperTabContextDefaultCompletionType = "<C-n>"
 
 let g:UltiSnipsListSnippets="<C-CR>"
-let g:UltiSnipsExpandTrigger="<C-Tab>"
+let g:UltiSnipsExpandTrigger="<M-Space>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 

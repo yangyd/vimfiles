@@ -2,6 +2,8 @@
 " Cursor movement in Normal/Visual mode
 noremap - 24k
 noremap = 24j
+noremap <M-j> 6j
+noremap <M-k> 6k
 noremap 9 ^
 noremap 0 $
 
@@ -46,11 +48,11 @@ cnoremap <M-l> <Right>
 " Quick exit
 nnoremap <C-q> :q<CR>
 
-" Tab switch "
-nnoremap <M-[> :tabprevious<CR>
-nnoremap <M-]> :tabnext<CR>
-inoremap <M-[> <Esc>:tabprevious<CR>
-inoremap <M-]> <Esc>:tabnext<CR>
+" Tab switching "
+nnoremap <M-Left> :tabprevious<CR>
+nnoremap <M-Right> :tabnext<CR>
+inoremap <M-Left> <Esc>:tabprevious<CR>
+inoremap <M-Right> <Esc>:tabnext<CR>
 
 " Window switching "
 nnoremap <C-h> <C-W>h
@@ -88,18 +90,17 @@ cnoremap <Leader>u <C-\>e<SID>DeleteTillSlash()<cr>
 " change to current file's dir
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
-" Move a line of text using ALT+[jk]
-nnoremap <M-j> mz:m+<cr>`z
-nnoremap <M-k> mz:m-2<cr>`z
-vnoremap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vnoremap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" Move lines up and down
+nnoremap <M-Down> mz:m+<cr>`z
+nnoremap <M-Up> mz:m-2<cr>`z
+vnoremap <M-Down> :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <M-Up> :m'<-2<cr>`>my`<mzgv`yo`z
 
-
-" When you press gv you vimgrep after the selected text
+" vimgrep after the selected text
 vnoremap <silent> <Leader>f :call <sid>VisualSelection('f')<CR>
 vnoremap <silent> <Leader>g :call <sid>VisualSelection('g')<CR>
 
-" Vimgreps in the current file
+" Vimgrep in files
 nnoremap <Leader>f :vimgrep // <C-r>%<C-b><right><right><right><right><right><right><right><right><right>
 nnoremap <Leader>g :vimgrep //j **/*<C-b><right><right><right><right><right><right><right><right><right>
 
