@@ -4,8 +4,11 @@ noremap - 24k
 noremap = 24j
 noremap <M-j> 6j
 noremap <M-k> 6k
+
 noremap 9 ^
 noremap 0 $
+noremap <M-b> ^
+noremap <M-e> $
 
 " don't mess up the registry when deleting a single character
 nnoremap x "_x
@@ -37,11 +40,16 @@ inoremap <M-h> <Left>
 inoremap <M-j> <Down>
 inoremap <M-k> <Up>
 inoremap <M-l> <Right>
+
 inoremap <M-9> <Esc>^i
 inoremap <M-0> <End>
-
+inoremap <M-b> <Esc>^i
+inoremap <M-e> <End>
 cnoremap <M-9> <C-b>
 cnoremap <M-0> <End>
+cnoremap <M-b> <C-b>
+cnoremap <M-e> <End>
+
 cnoremap <M-h> <Left>
 cnoremap <M-l> <Right>
 

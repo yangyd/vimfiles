@@ -22,10 +22,10 @@ let g:ctrlp_match_window = 'top,max:20'
 nnoremap <C-o> :CtrlPMRUFiles<CR>
 
 " Emmet "
-let g:user_emmet_expandabbr_key = '<M-e>'
-let g:user_emmet_next_key = '<M-f>'
-let g:user_emmet_prev_key = '<M-r>'
-let g:user_emmet_removetag_key = '<M-d>'
+let g:user_emmet_expandabbr_key = '<Leader>ee'
+let g:user_emmet_next_key = '<Leader>en'
+let g:user_emmet_prev_key = '<Leader>ep'
+let g:user_emmet_removetag_key = '<Leader>ed'
 
 " Ultisnips, Completor, and SuperTab
 let g:SuperTabDefaultCompletionType = "<C-n>"
