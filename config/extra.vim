@@ -36,10 +36,25 @@ let g:UltiSnipsExpandTrigger="<M-Space>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
-if g:RUNTIME_IS_WINDOWS
-  " Python installation with jedi
-  let g:completor_python_binary = 'C:\\Users\\i24026\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe'
-endif
+" Python installation with jedi
+let g:completor_python_binary = 'C:\\Users\\i24026\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe'
+let g:completor_gocode_binary = 'C:/local/var/go/bin/gocode.exe'
+
+" go
+" set to where you install packages with `go get`, not $GOROOT/bin
+let g:go_bin_path = "C:/local/var/go/bin"
+let g:go_fmt_command = "goimports"
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 
 " ale
 let g:ale_fixers = {
